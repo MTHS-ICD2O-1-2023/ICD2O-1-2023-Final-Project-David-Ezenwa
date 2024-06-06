@@ -17,8 +17,8 @@ class GameScene extends Phaser.Scene {
         this.coin = null
         this.portal = null
         this.spike = null
-        this.checkpoint = null
-        this.score = null
+        this.hasReachedCheckpoint = false;
+        this.score = 0
         this.scoreText = null
         this.scoreTextStyle = { font: "45px Fira Sans", fill: "#fff", align: "center" }
         this.text1 = null
@@ -49,7 +49,11 @@ class GameScene extends Phaser.Scene {
         this.background = this.add.image(0, 0, "scene1_Background")
         this.background.setOrigin(0, 0)
     
-        this.scoreText = this.add.text(10, 10, "Score: " + this.score.toString(), this.scoreTextStyle)
+        this.scoreText = this.add.text(10, 10, "Score: " + this.score.toString(), this.scoreTextStyle);
+
+        this.keySpaceObj = this.input.keyboard.addKey("SPACE");
+        this.keyLeftObj = this.input.keyboard.addKey("LEFT");
+        this.keyRightObj = this.input.keyboard.addKey("RIGHT")
     
         // platforms
         this.platforms = this.physics.add.staticGroup()
@@ -81,7 +85,7 @@ class GameScene extends Phaser.Scene {
         this.platforms.create(1444, 790, "scene1_ground")
     
         // checkpoint
-        this.checkpoint = this.physics.add.sprite (1800, 400, "scene1_checkpoint")
+        this.checkpoint = this.physics.add.sprite(1800, 400, "scene1_checkpoint");
     
         // portal
         this.portal = this.physics.add.sprite (1500, 670, "scene1_portal")
@@ -140,31 +144,32 @@ class GameScene extends Phaser.Scene {
     
         // collision between player and spikes
         this.physics.add.collider(this.player, this.spike, function() {
-          if (this.checkpoint === false) {
-            this.player.setPosition(100, 199)
+          if (!this.checkpoint) {
+            this.player.setPosition(100, 199);
           } else {
-            this.player.setPosition(1800, 400)
+            this.player.setPosition(1800, 400);
           }
-        }.bind(this))
+        }.bind(this));
     
         // collision between spike and coin
         this.physics.add.collider(this.coin, this.spike)
         
         // collision between checkpoint and player
         this.physics.add.collider(this.checkpoint, this.player, function() {
-          this.checkpoint = true
-        }.bind(this))
+          this.hasReachedCheckpoint = true;
+      }.bind(this));
     
         // collision between portal/checkpoint and platforms
         this.physics.add.collider(this.portal, this.platforms)
         this.physics.add.collider(this.checkpoint, this.platforms)
     
         // collision between the player and coins
-        this.physics.add.collider(this.player, this.coin, function(playerCollide, coinCollide) {
-          coinCollide.destroy();
-          this.score = this.score + 1
-          this.scoreText.setText("Score: " + this.score.toString())
-        }.bind(this))
+        this.physics.add.overlap(this.player, this.coin, function(player, coin) {
+          coin.disableBody(true, true); // Disables the coin sprite
+          this.score += 1;
+          this.scoreText.setText("Score: " + this.score.toString());
+        }, null, this);
+
     
         //collision between player and portal
         this.physics.add.collider(this.player, this.portal, function() {
@@ -173,21 +178,19 @@ class GameScene extends Phaser.Scene {
       }
     
       update (time, delta) {
-        // called 60 times a second, hopefully!
-        const keySpaceObj = this.input.keyboard.addKey("SPACE") // Get key object
-        const keyLeftObj = this.input.keyboard.addKey("LEFT") // Get key object
-        const keyRightObj = this.input.keyboard.addKey("RIGHT") // Get key object
-    
-        if (keyLeftObj.isDown === true) {
-          this.player.setVelocityX(-160)
-          this.player.anims.play("left", true)
-        } else if (keyRightObj.isDown === true) {
-          this.player.setVelocityX(160)
-          this.player.anims.play("right", true)
+        if (this.keyLeftObj.isDown === true) {
+          this.player.setVelocityX(-160);
+          this.player.anims.play('left', true);
+        } else if (this.keyRightObj.isDown === true) {
+          this.player.setVelocityX(160);
+          this.player.anims.play('right', true);
+        } else {
+          this.player.setVelocityX(0); // Stop the player if no key is pressed
         }
-    
-        if (keySpaceObj.isDown === true && this.player.body.touching.down) {
-          this.player.setVelocityY(-200)
+
+        // Add jump logic only if the player is touching the ground
+        if (this.keySpaceObj.isDown === true && this.player.body.touching.down) {
+          this.player.setVelocityY(-400); // Apply upward velocity for jumping
         }
       }
     }

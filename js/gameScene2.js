@@ -47,7 +47,13 @@ class GameScene2 extends Phaser.Scene {
         this.background = this.add.image(0, 0, "scene3_Background")
         this.background.setOrigin(0, 0)
 
-        this.scoreText = this.add.text(10, 10, "Score: " + this.score.toString(), this.scoreTextStyle)
+        this.scoreText = this.add.text(10, 10, "Score: " + this.score.toString(), this.scoreTextStyle);
+
+        // create() function
+        this.keySpaceObj = this.input.keyboard.addKey('SPACE');
+        this.keyLeftObj = this.input.keyboard.addKey('LEFT');
+        this.keyRightObj = this.input.keyboard.addKey('RIGHT');
+
 
         // platforms
         this.platforms = this.physics.add.staticGroup()
