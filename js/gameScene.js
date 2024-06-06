@@ -29,105 +29,105 @@ class GameScene extends Phaser.Scene {
     }
 
     preload () {
-        console.log('Game Scene')
+        console.log("Game Scene")
     
         // spritesheets
-        this.load.spritesheet('scene1_squareSprite', './assets/squareSprite.png', { frameWidth: 48, frameHeight: 48 })
+        this.load.spritesheet("scene1_squareSprite", "./assets/squareSprite.png", { frameWidth: 48, frameHeight: 48 })
     
         // images
-        this.load.image('scene1_Background', './assets/Background.jpg')
-        this.load.image('scene1_coin', './assets/coin.png')
-        this.load.image('scene1_spike', './assets/spike.png')
-        this.load.image('scene1_ground', './assets/platform.png')
-        this.load.image('scene1_checkpoint', './assets/checkpoint.gif')
-        this.load.image('scene1_portal', './assets/portal.gif')
+        this.load.image("scene1_Background", "./assets/Background.jpg")
+        this.load.image("scene1_coin", "./assets/coin.png")
+        this.load.image("scene1_spike", "./assets/spike.png")
+        this.load.image("scene1_ground", "./assets/platform.png")
+        this.load.image("scene1_checkpoint", "./assets/checkpoint.gif")
+        this.load.image("scene1_portal", "./assets/portal.gif")
     
         // sound
       }
     
       create (data) {
-        this.background = this.add.image(0, 0, 'scene1_Background')
+        this.background = this.add.image(0, 0, "scene1_Background")
         this.background.setOrigin(0, 0)
     
-        this.scoreText = this.add.text(10, 10, 'Score: ' + this.score.toString(), this.scoreTextStyle)
+        this.scoreText = this.add.text(10, 10, "Score: " + this.score.toString(), this.scoreTextStyle)
     
         // platforms
         this.platforms = this.physics.add.staticGroup()
-        this.platforms.create(100, 250, 'scene1_ground')
-        this.platforms.create(292, 250, 'scene1_ground')
-        this.platforms.create(484, 250, 'scene1_ground')
-        this.platforms.create(676, 250, 'scene1_ground')
-        this.platforms.create(868, 250, 'scene1_ground')
-        this.platforms.create(1060, 250, 'scene1_ground')
-        this.platforms.create(1252, 250, 'scene1_ground')
-        this.platforms.create(1444, 250, 'scene1_ground')
+        this.platforms.create(100, 250, "scene1_ground")
+        this.platforms.create(292, 250, "scene1_ground")
+        this.platforms.create(484, 250, "scene1_ground")
+        this.platforms.create(676, 250, "scene1_ground")
+        this.platforms.create(868, 250, "scene1_ground")
+        this.platforms.create(1060, 250, "scene1_ground")
+        this.platforms.create(1252, 250, "scene1_ground")
+        this.platforms.create(1444, 250, "scene1_ground")
         
-        this.platforms.create(1820, 520, 'scene1_ground')
-        this.platforms.create(1628, 520, 'scene1_ground')
-        this.platforms.create(1436, 520, 'scene1_ground')
-        this.platforms.create(1244, 520, 'scene1_ground')
-        this.platforms.create(1052, 520, 'scene1_ground')
-        this.platforms.create(860, 520, 'scene1_ground')
-        this.platforms.create(668, 520, 'scene1_ground')
-        this.platforms.create(476, 520, 'scene1_ground')
+        this.platforms.create(1820, 520, "scene1_ground")
+        this.platforms.create(1628, 520, "scene1_ground")
+        this.platforms.create(1436, 520, "scene1_ground")
+        this.platforms.create(1244, 520, "scene1_ground")
+        this.platforms.create(1052, 520, "scene1_ground")
+        this.platforms.create(860, 520, "scene1_ground")
+        this.platforms.create(668, 520, "scene1_ground")
+        this.platforms.create(476, 520, "scene1_ground")
     
-        this.platforms.create(100, 790, 'scene1_ground')
-        this.platforms.create(292, 790, 'scene1_ground')
-        this.platforms.create(484, 790, 'scene1_ground')
-        this.platforms.create(676, 790, 'scene1_ground')
-        this.platforms.create(868, 790, 'scene1_ground')
-        this.platforms.create(1060, 790, 'scene1_ground')
-        this.platforms.create(1252, 790, 'scene1_ground')
-        this.platforms.create(1444, 790, 'scene1_ground')
+        this.platforms.create(100, 790, "scene1_ground")
+        this.platforms.create(292, 790, "scene1_ground")
+        this.platforms.create(484, 790, "scene1_ground")
+        this.platforms.create(676, 790, "scene1_ground")
+        this.platforms.create(868, 790, "scene1_ground")
+        this.platforms.create(1060, 790, "scene1_ground")
+        this.platforms.create(1252, 790, "scene1_ground")
+        this.platforms.create(1444, 790, "scene1_ground")
     
         // checkpoint
-        this.checkpoint = this.physics.add.sprite (1800, 400, 'scene1_checkpoint')
+        this.checkpoint = this.physics.add.sprite (1800, 400, "scene1_checkpoint")
     
         // portal
-        this.portal = this.physics.add.sprite (1500, 670, 'scene1_portal')
+        this.portal = this.physics.add.sprite (1500, 670, "scene1_portal")
     
         // spike
         this.spike = this.physics.add.staticGroup()
     
-        this.spike.create(900, 205, 'scene1_spike')
-        this.spike.create(1300, 205, 'scene1_spike')
+        this.spike.create(900, 205, "scene1_spike")
+        this.spike.create(1300, 205, "scene1_spike")
     
-        this.spike.create(1200, 475, 'scene1_spike')
-        this.spike.create(1190, 475, 'scene1_spike')
-        this.spike.create(890, 475, 'scene1_spike')
+        this.spike.create(1200, 475, "scene1_spike")
+        this.spike.create(1190, 475, "scene1_spike")
+        this.spike.create(890, 475, "scene1_spike")
     
-        this.spike.create(500, 745, 'scene1_spike')
-        this.spike.create(800, 745, 'scene1_spike')
+        this.spike.create(500, 745, "scene1_spike")
+        this.spike.create(800, 745, "scene1_spike")
     
         // coin
         this.coin = this.physics.add.staticGroup()
-        this.coin.create(1190, 430, 'scene1_coin')
-        this.coin.create(1090, 430, 'scene1_coin')
-        this.coin.create(990, 430, 'scene1_coin')
-        this.coin.create(890, 430, 'scene1_coin')
-        this.coin.create(790, 430, 'scene1_coin')
-        this.coin.create(690, 430, 'scene1_coin')
+        this.coin.create(1190, 430, "scene1_coin")
+        this.coin.create(1090, 430, "scene1_coin")
+        this.coin.create(990, 430, "scene1_coin")
+        this.coin.create(890, 430, "scene1_coin")
+        this.coin.create(790, 430, "scene1_coin")
+        this.coin.create(690, 430, "scene1_coin")
     
-        this.coin.create(500, 700, 'scene1_coin')
-        this.coin.create(600, 700, 'scene1_coin')
-        this.coin.create(700, 700, 'scene1_coin')
-        this.coin.create(800, 700, 'scene1_coin')
+        this.coin.create(500, 700, "scene1_coin")
+        this.coin.create(600, 700, "scene1_coin")
+        this.coin.create(700, 700, "scene1_coin")
+        this.coin.create(800, 700, "scene1_coin")
     
         // player
-        this.player = this.physics.add.sprite (100, 199, 'scene1_squareSprite');
+        this.player = this.physics.add.sprite (100, 199, "scene1_squareSprite");
     
         this.player.setCollideWorldBounds(true);
     
         this.anims.create({
-          key: 'left',
-          frames: this.anims.generateFrameNumbers('scene1_squareSprite', { start: 0, end: 1 }),
+          key: "left",
+          frames: this.anims.generateFrameNumbers("scene1_squareSprite", { start: 0, end: 1 }),
           frameRate: 5,
           repeat: -1
         })
     
         this.anims.create({
           key: 'right',
-          frames: this.anims.generateFrameNumbers('scene1_squareSprite', { start: 0, end: 1 }),
+          frames: this.anims.generateFrameNumbers("scene1_squareSprite", { start: 0, end: 1 }),
           frameRate: 5,
           repeat: -1
         })
@@ -163,7 +163,7 @@ class GameScene extends Phaser.Scene {
         this.physics.add.collider(this.player, this.coin, function(playerCollide, coinCollide) {
           coinCollide.destroy();
           this.score = this.score + 1
-          this.scoreText.setText('Score: ' + this.score.toString())
+          this.scoreText.setText("Score: " + this.score.toString())
         }.bind(this))
     
         //collision between player and portal
@@ -174,16 +174,16 @@ class GameScene extends Phaser.Scene {
     
       update (time, delta) {
         // called 60 times a second, hopefully!
-        const keySpaceObj = this.input.keyboard.addKey('SPACE') // Get key object
-        const keyLeftObj = this.input.keyboard.addKey('LEFT') // Get key object
-        const keyRightObj = this.input.keyboard.addKey('RIGHT') // Get key object
+        const keySpaceObj = this.input.keyboard.addKey("SPACE") // Get key object
+        const keyLeftObj = this.input.keyboard.addKey("LEFT") // Get key object
+        const keyRightObj = this.input.keyboard.addKey("RIGHT") // Get key object
     
         if (keyLeftObj.isDown === true) {
           this.player.setVelocityX(-160)
-          this.player.anims.play('left', true)
+          this.player.anims.play("left", true)
         } else if (keyRightObj.isDown === true) {
           this.player.setVelocityX(160)
-          this.player.anims.play('right', true)
+          this.player.anims.play("right", true)
         }
     
         if (keySpaceObj.isDown === true && this.player.body.touching.down) {
