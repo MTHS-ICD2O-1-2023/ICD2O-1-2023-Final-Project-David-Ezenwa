@@ -4,7 +4,7 @@
 //
 // Created by: David.E
 // Created on: May 2024
-// This is the Title Scene
+// This is the Configuration file
 
 import SplashScene from './splashScene.js'
 import TitleScene from './titleScene.js'
